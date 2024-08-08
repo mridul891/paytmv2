@@ -1,10 +1,13 @@
+// library
 const express = require("express");
-const mainRouter = require("./routes/index")
 const cors = require("cors")
 const PORT = 3000
+// Middlewares
 app.use(cors())
 app.use(express.json())
 
+// Routers 
+const mainRouter = require("./routes/index")
 
 app.use("/api/v1", mainRouter)
 
