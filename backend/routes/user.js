@@ -4,8 +4,10 @@ const zod = require('zod')
 const User = require("../db")
 const JWT_SECRET = require("../config")
 const jwt = require("jsonwebtoken")
+
+// SignUp ROute
 const signupSchema = zod.object({
-    username: zod.string(),
+    username: zod.string().email(),
     password: zod.string(),
     firstname: zod.string(),
     lastname: zod.string()
@@ -36,7 +38,31 @@ router.post('/signup', async (req, res) => {
     })
 })
 
-router.post('/signup', (req, res) => {
 
+// Sign In Route 
+const signinSchema = zod.object({
+    username: zod.string().email(),
+    password: zod.string()
+})
+
+router.post('/signup', async (req, res) => {
+    const { success } = signinSchema.safeParse(req.body)
+    if (!success) {
+        return res.status(411).json({ message: "Error while logging in" })
+    }
+    const user = await User.findOne({
+        username: req.body.username,
+        password: req.body.password
+    })
+
+    if (user) {
+        const token = jwt.sign({ userId: user_id }, JWT_SECRET)
+        res.json({ token: token })
+        return
+    }
+
+    res.status(411).json({
+        message: "Error while logging in"
+    })
 })
 module.exports = router
