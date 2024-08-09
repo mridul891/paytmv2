@@ -65,4 +65,23 @@ router.post('/signup', async (req, res) => {
         message: "Error while logging in"
     })
 })
+
+
+// User update information 
+const updateSchema = zod.object({
+    firstname: zod.string().optional(),
+    lastname: zod.string().optional(),
+    password: zod.string().optional()
+})
+
+router.put("/", authMiddleware, async (req, res) => {
+    const { success } = updateSchema.safeParse(req.body)
+    if (!success) {
+        return res.status(411).json({ message: "Error while updating" })
+    }
+    await User.updateOne({ _id: req.userId }, req.body)
+
+    res.json({ message: "Updated Succesfully" })
+})
+
 module.exports = router
