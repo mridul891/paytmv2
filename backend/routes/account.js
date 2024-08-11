@@ -3,6 +3,7 @@ const { Account } = require('../db')
 const { authMiddleware } = require('../middleware/middleware')
 const router = express.Router()
 const mongoose = require('mongoose')
+
 // To fetch The balance of the user 
 router.get("/balance", authMiddleware, async (req, res) => {
 
@@ -42,10 +43,10 @@ router.post("/transfer", authMiddleware, async (req, res) => {
     await Account.updateOne({ userId: to }, { $inc: { balance: +amount } }).session(session)
 
     await session.commitTransaction()
-    
+
     res.json({
         message: "Transfer successful"
     })
 })
 
-module.export = router
+module.exports = router
