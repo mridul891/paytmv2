@@ -4,6 +4,7 @@ const zod = require('zod')
 const User = require("../db")
 const JWT_SECRET = require("../config")
 const jwt = require("jsonwebtoken")
+const { authMiddleware } = require("../middleware/middleware")
 
 // SignUp ROute
 const signupSchema = zod.object({
@@ -82,6 +83,31 @@ router.put("/", authMiddleware, async (req, res) => {
     await User.updateOne({ _id: req.userId }, req.body)
 
     res.json({ message: "Updated Succesfully" })
+})
+
+// This api will return all the users if the filter value = h from the user database 
+router.get("/bulk", async (req, res) => {
+    const filter = req.query.filter || ""
+    const users = await User.find({
+        $or: [{
+            firstname: {
+                "$regrex": filter
+            }
+        }, {
+            lastname: {
+                "$regrex": filter
+            }
+        }]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            _id: user._id
+        }))
+    })
 })
 
 module.exports = router
