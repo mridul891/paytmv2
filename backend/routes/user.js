@@ -10,22 +10,22 @@ const { authMiddleware } = require("../middleware/middleware")
 const signupSchema = zod.object({
     username: zod.string().email(),
     password: zod.string(),
-    firstname: zod.string(),
-    lastname: zod.string()
+    firstName: zod.string(),
+    lastName: zod.string()
 })
 router.post('/signup', async (req, res) => {
     const body = req.body;
     // Checks for the inputs using zod
-    const { success } = signupSchema.safeParse(req.body)
+    const { success } =  signupSchema.safeParse(req.body)
     if (!success) {
-        return res.status(411).json({ message: "Email already taken / InCorrect input" })
+        return res.status(411).json({ message: "Email already taken / InCorrect input with ans" })
     }
 
     // Finding Existing Users
     const existingUser = await User.findOne({
         username: body.username
     })
-    if (existingUser._id) {
+    if (existingUser) {
         return res.status(411).json({ message: "User Already Exists" })
     }
 
@@ -83,7 +83,7 @@ router.post('/signup', async (req, res) => {
 
 // User update information 
 const updateSchema = zod.object({
-    firstname: zod.string().optional(),
+    firstName: zod.string().optional(),
     lastname: zod.string().optional(),
     password: zod.string().optional()
 })
@@ -103,7 +103,7 @@ router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || ""
     const users = await User.find({
         $or: [{
-            firstname: {
+            firstName: {
                 "$regrex": filter
             }
         }, {
@@ -116,7 +116,7 @@ router.get("/bulk", async (req, res) => {
     res.json({
         user: users.map(user => ({
             username: user.username,
-            firstname: user.firstname,
+            firstName: user.firstName,
             lastname: user.lastname,
             _id: user._id
         }))
