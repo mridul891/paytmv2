@@ -16,7 +16,7 @@ const signupSchema = zod.object({
 router.post('/signup', async (req, res) => {
     const body = req.body;
     // Checks for the inputs using zod
-    const { success } =  signupSchema.safeParse(req.body)
+    const { success } = signupSchema.safeParse(req.body)
     if (!success) {
         return res.status(411).json({ message: "Email already taken / InCorrect input with ans" })
     }
@@ -42,10 +42,7 @@ router.post('/signup', async (req, res) => {
     const Token = jwt.sign({ userId: dbUser._id }, JWT_SECRET)
 
     // adding a random amount to the user 
-    await Account.create({
-        userId: dbUser._id,
-        balance: 1 + Math.random() * 10000
-    })
+
     res.json({
         message: "User Created Successfully",
         token: Token
@@ -59,7 +56,7 @@ const signinSchema = zod.object({
     password: zod.string()
 })
 
-router.post('/signup', async (req, res) => {
+router.post('/signin', async (req, res) => {
     const { success } = signinSchema.safeParse(req.body)
     if (!success) {
         return res.status(411).json({ message: "Error while logging in" })
@@ -70,7 +67,7 @@ router.post('/signup', async (req, res) => {
     })
 
     if (user) {
-        const token = jwt.sign({ userId: user_id }, JWT_SECRET)
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET)
         res.json({ token: token })
         return
     }
@@ -84,7 +81,7 @@ router.post('/signup', async (req, res) => {
 // User update information 
 const updateSchema = zod.object({
     firstName: zod.string().optional(),
-    lastname: zod.string().optional(),
+    lastName: zod.string().optional(),
     password: zod.string().optional()
 })
 
@@ -107,7 +104,7 @@ router.get("/bulk", async (req, res) => {
                 "$regrex": filter
             }
         }, {
-            lastname: {
+            lastName: {
                 "$regrex": filter
             }
         }]
@@ -117,10 +114,22 @@ router.get("/bulk", async (req, res) => {
         user: users.map(user => ({
             username: user.username,
             firstName: user.firstName,
-            lastname: user.lastname,
+            lastName: user.lastName,
             _id: user._id
         }))
     })
+})
+
+router.post('/addbalance', authMiddleware, async (req, res) => {
+    // amount aur passowrd body se lo 
+    // password verify karo 
+    // add balance to the users account in accounts database 
+    const { amount } = req.body
+    await Account.create({
+        userId: req.userId,
+        balance: amount
+    })
+    res.json({ message: " Money added" })
 })
 
 module.exports = router
