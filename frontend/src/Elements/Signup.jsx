@@ -1,13 +1,14 @@
+import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
   const { register } = useForm();
   return (
-    <div className="flex flex-col-reverse">
+    <div className="flex items-center flex-col justify-center border-2 border-lime-300 h-[100vh]">
       <form>
-        <h1 className="">Sign Up </h1>
-        <p>
+        <h1 className="text-[6rem] font-bold text-center">Sign Up </h1>
+        <p className="">
           Enter Your information to create an <br /> account
         </p>
         <div className="flex flex-col">
@@ -20,7 +21,7 @@ const Signup = () => {
           <label htmlFor="Password">Password</label>
           <input {...register("Password")} type="password" />
         </div>
-        <button>Sign up</button>
+        <Button>Submit</Button>
         <p>
           Already have an account? <Link to={"/signin"}>Login</Link>
         </p>
