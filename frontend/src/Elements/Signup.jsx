@@ -28,7 +28,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-[100vh] font-semibold ">
+    <div className="flex justify-center items-center h-[100vh] font-semibold font-mono">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -40,7 +40,9 @@ const SignUp = () => {
             name="FirstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-bold">First Name</FormLabel>
+                <FormLabel className="text-xl font-bold font-mono">
+                  First Name
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Mridul" {...field} />
                 </FormControl>
@@ -54,7 +56,9 @@ const SignUp = () => {
             name="LastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-bold">LastName</FormLabel>
+                <FormLabel className="text-xl font-bold font-mono">
+                  LastName
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Pandey" {...field} />
                 </FormControl>
@@ -68,7 +72,9 @@ const SignUp = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-bold">Username</FormLabel>
+                <FormLabel className="text-xl font-bold font-mono">
+                  Username
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="johndoe@gmail.com"
@@ -86,16 +92,18 @@ const SignUp = () => {
             name="Password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-bold">Password</FormLabel>
+                <FormLabel className="text-xl font-bold font-mono">
+                  Password
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} type="password" />
+                  <Input  {...field} type="password" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Sign Up</Button>
-          <p className="font-bold md:text-2xl lg:text-2xl">
+          <Button type="submit" className="font-mono text-xl font-bold">Sign Up</Button>
+          <p className="font-bold font-mono md:text-2xl lg:text-2xl ">
             Already Have an account?{" "}
             <Link to={"/signin"}>
               <u>Login</u>
