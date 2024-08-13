@@ -1,116 +1,28 @@
-import { useForm } from "react-hook-form";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
-import { Link } from "react-router-dom";
+import { Button } from "@/Component/Button";
+import Heading from "../Component/Heading";
+import Subheading from "../Component/Subheading";
+import InputBox from "./../Component/InputBox";
+import { BottomWarning } from "@/Component/BottomWarning";
 
 const SignUp = () => {
-  const form = useForm();
-
-  function onSubmit(data) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
-    <div className="flex justify-center items-center h-[100vh] font-semibold font-mono">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
-          {/* First Name */}
-          <FormField
-            control={form.control}
-            name="FirstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl font-bold font-mono">
-                  First Name
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Mridul" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Last Name */}
-          <FormField
-            control={form.control}
-            name="LastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl font-bold font-mono">
-                  LastName
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Pandey" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Username */}
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl font-bold font-mono">
-                  Username
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="johndoe@gmail.com"
-                    {...field}
-                    type="email"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Password */}
-          <FormField
-            control={form.control}
-            name="Password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl font-bold font-mono">
-                  Password
-                </FormLabel>
-                <FormControl>
-                  <Input  {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="font-mono text-xl font-bold">Sign Up</Button>
-          <p className="font-bold font-mono md:text-2xl lg:text-2xl ">
-            Already Have an account?{" "}
-            <Link to={"/signin"}>
-              <u>Login</u>
-            </Link>
-          </p>
-        </form>
-      </Form>
+    <div className="flex justify-center items-center">
+      <div className="flex justify-center flex-col w-[50vw]  h-[100vh] font-semibold font-mono lg:w-[30vw]">
+        <Heading label={"Sign up"} />
+        <Subheading label={"Enter Your Information to create an account"} />
+        <InputBox label={"firstName"} placeholder={"John"} />
+        <InputBox label={"lastName"} placeholder={"Doe"} />
+        <InputBox label={"username"} placeholder={"johnDoe@gmail.com"} />
+        <InputBox label={"password"} placeholder={123456} />
+        <div className="pt-4">
+          <Button label={"Sign up"} />
+        </div>
+        <BottomWarning
+          label={"Already Have an account?"}
+          to={"/signin"}
+          buttonText={"Sign in"}
+        />
+      </div>
     </div>
   );
 };
