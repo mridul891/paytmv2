@@ -2,7 +2,7 @@ import { Button } from "./Button";
 
 const UserDetails = ({ data }) => {
   return (
-    <div className="flex justify-between items-center mt-3">
+    <div className="flex justify-between items-center mt-3" key={data._id}>
       <div className="flex mt-3 items-center">
         {/* Icons */}
         <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
