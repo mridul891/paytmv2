@@ -4,11 +4,12 @@ import Heading from "@/Component/Heading";
 import InputBox from "@/Component/InputBox";
 import Subheading from "@/Component/Subheading";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
 
   const handleSubmit = async () => {
     const response = await axios.post(
@@ -18,7 +19,7 @@ const Signin = () => {
         password,
       }
     );
-    console.log(response);
+    localStorage.setItem("paytmtoken", response.data.token);
   };
   return (
     <div className="flex justify-center items-center">
