@@ -59,7 +59,7 @@ const signinSchema = zod.object({
 router.post('/signin', async (req, res) => {
     const { success } = signinSchema.safeParse(req.body)
     if (!success) {
-        return res.status(411).json({ message: "Error while logging in" })
+        return res.status(401).json({ message: "Error while logging in" })
     }
     const user = await User.findOne({
         username: req.body.username,
@@ -69,7 +69,6 @@ router.post('/signin', async (req, res) => {
     if (user) {
         const token = jwt.sign({ userId: user._id }, JWT_SECRET)
         res.json({ token: token })
-        return
     }
 
     res.status(411).json({
