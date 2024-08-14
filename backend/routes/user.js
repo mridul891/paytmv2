@@ -18,7 +18,7 @@ router.post('/signup', async (req, res) => {
     // Checks for the inputs using zod
     const { success } = signupSchema.safeParse(req.body)
     if (!success) {
-        return res.status(411).json({ message: "Email already taken / InCorrect input with ans" })
+        return res.status(401).json({ message: "Email already taken / InCorrect input with ans" })
     }
 
     // Finding Existing Users
@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
         username: body.username
     })
     if (existingUser) {
-        return res.status(411).json({ message: "User Already Exists" })
+        return res.status(401).json({ message: "User Already Exists" })
     }
 
 
@@ -42,6 +42,11 @@ router.post('/signup', async (req, res) => {
     const Token = jwt.sign({ userId: dbUser._id }, JWT_SECRET)
 
     // adding a random amount to the user 
+
+    await Account.create({
+        userId: dbUser._id,
+        balance: 0
+    })
 
     res.json({
         message: "User Created Successfully",
@@ -84,6 +89,7 @@ const updateSchema = zod.object({
     password: zod.string().optional()
 })
 
+// Update Information 
 router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateSchema.safeParse(req.body)
     if (!success) {
@@ -100,11 +106,11 @@ router.get("/bulk", async (req, res) => {
     const users = await User.find({
         "$or": [{
             "firstName": {
-                "$regex": new RegExp(filter,"i")
+                "$regex": new RegExp(filter, "i")
             }
         }, {
             "lastName": {
-                "$regex": new RegExp(filter,"i")
+                "$regex": new RegExp(filter, "i")
             }
         }]
     })
@@ -119,6 +125,7 @@ router.get("/bulk", async (req, res) => {
     })
 })
 
+// Add the balance 
 router.post('/addbalance', authMiddleware, async (req, res) => {
     const { amount } = req.body
     await Account.create({
@@ -128,4 +135,11 @@ router.post('/addbalance', authMiddleware, async (req, res) => {
     res.json({ message: " Money added" })
 })
 
+
+router.get("/info", authMiddleware, async (req, res) => {
+
+    const account = await User.findOne({ _id: req.userId })
+
+    res.json({ account })
+})
 module.exports = router

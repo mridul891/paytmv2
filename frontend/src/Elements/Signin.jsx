@@ -5,11 +5,12 @@ import InputBox from "@/Component/InputBox";
 import Subheading from "@/Component/Subheading";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const response = await axios.post(
@@ -20,6 +21,7 @@ const Signin = () => {
       }
     );
     localStorage.setItem("paytmtoken", response.data.token);
+    navigate("/dashboard");
   };
   return (
     <div className="flex justify-center items-center">
