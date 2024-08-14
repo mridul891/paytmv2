@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 
 const UserDetails = ({ data }) => {
+  const navigate = useNavigate();
+  const handleTransfer = () => {
+    navigate("/send");
+  };
+
   return (
     <div className="flex justify-between items-center mt-3" key={data._id}>
       <div className="flex mt-3 items-center">
@@ -19,7 +25,7 @@ const UserDetails = ({ data }) => {
       </div>
       {/* Send Button */}
       <div className="flex flex-col justify-center font-bold">
-        <Button label={"Send Money"} />
+        <Button label={"Send Money"} onClick={handleTransfer} />
       </div>
     </div>
   );
