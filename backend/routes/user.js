@@ -120,9 +120,6 @@ router.get("/bulk", async (req, res) => {
 })
 
 router.post('/addbalance', authMiddleware, async (req, res) => {
-    // amount aur passowrd body se lo 
-    // password verify karo 
-    // add balance to the users account in accounts database 
     const { amount } = req.body
     await Account.create({
         userId: req.userId,
