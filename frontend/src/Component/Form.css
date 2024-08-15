@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
+
+.smallheading {
+  font-family: Manrope;
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 67.2px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.paraHeading {
+  font-family: Manrope;
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 10px;
+  letter-spacing: -0.02em;
+  color: #808080;
+}
+.paraHeading2 {
+  font-family: Manrope;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 10px;
+  letter-spacing: -0.02em;
+  color: #808080;
+}
+.paraHeading3 {
+  font-family: Covered By Your Grace;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 10px;
+  letter-spacing: -0.02em;
+  color: #808080;
+}
+.mainheading {
+  font-family: Covered By Your Grace;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 39.6px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #2da950;
+  text-align: center;
+}
+.button {
+  width: 370px;
+  height: 60px;
+  padding: 8px 46px 8px 46px;
+  gap: 10px;
+  border-radius: 64px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+}
+input {
+  width: 370px;
+  height: 60px;
+  padding: 8px 46px 8px 46px;
+  gap: 10px;
+  border-radius: 64px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  background-color: rgba(230, 230, 239, 0.867);
+}

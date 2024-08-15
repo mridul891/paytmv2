@@ -5,14 +5,22 @@ import Dashboard from "./Elements/Dashboard";
 import AddBalance from "./Elements/AddBalance";
 import { SendMoney } from "./Component/SendMoney";
 
+import Error from "./Component/Error";
+import Status from "./Component/Status";
+
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Dashboard />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/signin" element={<Signin />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/send" element={<SendMoney />} />
       <Route path="/addbalance" element={<AddBalance />} />
+      <Route
+        path="/success"
+        element={<Status label={"Success"} logo={"✅"} />}
+      />
+      <Route path="/error" element={<Status label={"Error"} logo={"❌"} />} />
     </Routes>
   );
 }

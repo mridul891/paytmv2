@@ -17,6 +17,7 @@ const SignUp = () => {
 
   const { toast } = useToast();
   const navigate = useNavigate();
+
   const handleSubmit = async () => {
     await axios
       .post("http://localhost:3000/api/v1/user/signup", {
@@ -27,7 +28,7 @@ const SignUp = () => {
       })
       .then((res) => {
         localStorage.setItem("paytmtoken", res.data.token);
-        navigate("/dashboard");
+        navigate("/");
       });
   };
   return (

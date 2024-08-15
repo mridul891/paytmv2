@@ -12,6 +12,13 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("paytmtoken");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
   const handleSubmit = async () => {
     const response = await axios.post(
       "http://localhost:3000/api/v1/user/signin",
@@ -21,7 +28,7 @@ const Signin = () => {
       }
     );
     localStorage.setItem("paytmtoken", response.data.token);
-    navigate("/dashboard");
+    navigate("/");
   };
   return (
     <div className="flex justify-center items-center">

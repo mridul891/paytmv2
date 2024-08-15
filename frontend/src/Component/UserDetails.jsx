@@ -1,10 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
+import { useEffect } from "react";
 
 const UserDetails = ({ data }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("paytmtoken");
+    if (!token) {
+      navigate("/signin");
+    }
+  }, []);
+
   const handleTransfer = () => {
-    navigate("/send");
+    navigate("/send?id=" + data._id + "&name=" + data.firstName);
   };
 
   return (

@@ -1,8 +1,35 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 export const SendMoney = () => {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const Name = searchParams.get("name");
+  const [amount, setAmount] = useState("");
+  const [Success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+  const handleTransfer = async () => {
+    const token = localStorage.getItem("paytmtoken");
+    const response = await axios
+      .post(
+        "http://localhost:3000/api/v1/account/transfer",
+        {
+          to: id,
+          amount,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then(() => navigate("/success"))
+      .catch(() => {
+        navigate("/error");
+      });
+  };
 
-  
-
-  
   return (
     <div className="flex justify-center h-screen bg-gray-100">
       <div className="h-full flex flex-col justify-center">
@@ -15,7 +42,7 @@ export const SendMoney = () => {
               <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
                 <span className="text-2xl text-white">A</span>
               </div>
-              <h3 className="text-2xl font-semibold">Friend&apos;s Name</h3>
+              <h3 className="text-2xl font-semibold">{Name}</h3>
             </div>
             <div className="space-y-4">
               <div className="space-y-2">
@@ -30,9 +57,13 @@ export const SendMoney = () => {
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   id="amount"
                   placeholder="Enter amount"
+                  onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
-              <button className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
+              <button
+                className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white"
+                onClick={handleTransfer}
+              >
                 Initiate Transfer
               </button>
             </div>
