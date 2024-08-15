@@ -5,7 +5,6 @@ import Dashboard from "./Elements/Dashboard";
 import AddBalance from "./Elements/AddBalance";
 import { SendMoney } from "./Component/SendMoney";
 
-import Error from "./Component/Error";
 import Status from "./Component/Status";
 
 function App() {
