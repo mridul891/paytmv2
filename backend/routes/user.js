@@ -128,13 +128,16 @@ router.get("/bulk", async (req, res) => {
 // Add the balance 
 router.post('/addbalance', authMiddleware, async (req, res) => {
     const { amount } = req.body
-    await Account.create({
+    const response = await Account.findOne({
+        userId: req.userId
+    })
+    console.log(response.balance)
+    await Account.updateOne({
         userId: req.userId,
-        balance: amount
+        balance: response.balance + amount
     })
     res.json({ message: " Money added" })
 })
-
 
 router.get("/info", authMiddleware, async (req, res) => {
 
@@ -143,6 +146,13 @@ router.get("/info", authMiddleware, async (req, res) => {
     res.json({ account })
 })
 
+router.post("/recieveinfo", authMiddleware, async (req, res) => {
+    const code = req.body.code
+    
+    const account = await User.findOne({ _id: code })
+
+    res.json({ account })
+})
 
 
 module.exports = router

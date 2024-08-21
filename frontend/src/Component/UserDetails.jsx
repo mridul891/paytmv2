@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 
 const UserDetails = ({ data }) => {
   const navigate = useNavigate();

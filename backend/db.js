@@ -58,7 +58,7 @@ const TransactionSchema = new mongoose.Schema({
         required: true
     },
     reciever: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     }
 })
