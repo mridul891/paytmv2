@@ -45,7 +45,27 @@ const accountSchema = new mongoose.Schema({
         required: true
     }
 })
-const User = mongoose.model("User", userSchema)
-const Account = mongoose.model("Account", accountSchema);
 
-module.exports = { User, Account } 
+
+const TransactionSchema = new mongoose.Schema({
+    amount: {
+        type: Number,
+        required: true
+    },
+    sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    reciever: {
+        type: String,
+        required: true
+    }
+})
+
+const User = mongoose.model("User", userSchema);
+const Account = mongoose.model("Account", accountSchema);
+const History = mongoose.model("History ", TransactionSchema);
+
+
+module.exports = { User, Account, History } 
