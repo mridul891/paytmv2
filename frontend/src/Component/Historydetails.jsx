@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Historydetails = ({ el }) => {
+const Historydetails = ({ el, index }) => {
   const [firstName, setFirstName] = useState("");
   const code = el.reciever;
 
@@ -22,6 +22,7 @@ const Historydetails = ({ el }) => {
   }, []);
   return (
     <div className="flex justify-between w-full">
+      <div>{index}</div>
       <div>{firstName}</div>
       <div>{el.amount}</div>
     </div>
