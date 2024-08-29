@@ -5,7 +5,12 @@ const cors = require("cors")
 const PORT = 3000
 const mainRouter = require("./routes/index")
 // Middlewares
-app.use(cors())
+app.use(cors({
+    "origin": "https://paytmv2.vercel.app/",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}))
 app.use(express.json())
 
 // Routers 
