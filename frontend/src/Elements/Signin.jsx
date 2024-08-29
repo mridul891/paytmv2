@@ -39,11 +39,13 @@ const Signin = () => {
           label={"username"}
           placeholder={"johnDoe@gmail.com"}
           onChange={(e) => setUsername(e.target.value)}
+          type="text"
         />
         <InputBox
           label={"password"}
           placeholder={123456}
           onChange={(e) => setPassword(e.target.value)}
+          type="password"
         />
         <div className="pt-4">
           <Button label={"Sign In"} onClick={handleSubmit} />
