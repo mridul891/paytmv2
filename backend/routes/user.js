@@ -77,7 +77,7 @@ router.post('/signin', async (req, res) => {
     }
 
     res.status(411).json({
-        message: "Error while logging in"
+        message: "Error while logging in after scanning"
     })
 })
 
