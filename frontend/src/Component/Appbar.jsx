@@ -6,7 +6,7 @@ const Appbar = () => {
   useEffect(() => {
     const token = localStorage.getItem("paytmtoken");
     axios
-      .get("http://localhost:3000/api/v1/user/info", {
+      .get("https://paytmv2.onrender.com/api/v1/user/info", {
         headers: {
           Authorization: "Bearer " + token,
         },

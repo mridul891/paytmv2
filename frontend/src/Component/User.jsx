@@ -10,7 +10,7 @@ const User = () => {
   useEffect(() => {
   
     axios
-      .get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
+      .get("https://paytmv2.onrender.com/api/v1/user/bulk?filter=" + filter)
       .then((response) => setUsers(response.data.user));
   }, [filter]);
 

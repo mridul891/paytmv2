@@ -20,7 +20,7 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
     await axios
-      .post("http://localhost:3000/api/v1/user/signup", {
+      .post("https://paytmv2.onrender.com/api/v1/user/signup", {
         firstName,
         lastName,
         username,

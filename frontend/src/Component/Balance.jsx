@@ -6,7 +6,7 @@ const Balance = ({ label }) => {
   useEffect(() => {
     const token = localStorage.getItem("paytmtoken");
     axios
-      .get("http://localhost:3000/api/v1/account/balance", {
+      .get("https://paytmv2.onrender.com/api/v1/account/balance", {
         headers: {
           Authorization: "Bearer " + token,
         },

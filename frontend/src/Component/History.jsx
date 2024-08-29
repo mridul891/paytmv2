@@ -7,7 +7,7 @@ const History = () => {
   useEffect(() => {
     const token = localStorage.getItem("paytmtoken");
     axios
-      .get("http://localhost:3000/api/v1/history/history", {
+      .get("https://paytmv2.onrender.com/api/v1/history/history", {
         headers: {
           Authorization: "Bearer " + token,
         },

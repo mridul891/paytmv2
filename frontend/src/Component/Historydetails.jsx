@@ -10,7 +10,7 @@ const Historydetails = ({ el, index }) => {
 
     axios
       .post(
-        "http://localhost:3000/api/v1/user/recieveinfo",
+        "https://paytmv2.onrender.com/api/v1/user/recieveinfo",
         { code },
         {
           headers: {

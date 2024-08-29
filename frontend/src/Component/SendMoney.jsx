@@ -13,7 +13,7 @@ export const SendMoney = () => {
     const token = localStorage.getItem("paytmtoken");
     const response = await axios
       .post(
-        "http://localhost:3000/api/v1/account/transfer",
+        "https://paytmv2.onrender.com/api/v1/account/transfer",
         {
           to: id,
           amount,
